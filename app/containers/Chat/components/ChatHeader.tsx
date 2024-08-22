@@ -3,7 +3,7 @@ import Locale from "@/app/locales";
 import { Path } from "@/app/constant";
 import { DEFAULT_TOPIC, useChatStore } from "@/app/store/chat";
 
-import LogIcon from "@/app/icons/logIcon.svg";
+import AssistantMobileActive from "@/app/icons/assistantMobileActive.svg";
 import GobackIcon from "@/app/icons/goback.svg";
 import ShareIcon from "@/app/icons/shareIcon.svg";
 import ModelSelect from "./ModelSelect";
@@ -45,7 +45,7 @@ export default function ChatHeader(props: ChatHeaderProps) {
           <GobackIcon />
         </div>
       ) : (
-        <LogIcon />
+        <AssistantMobileActive />
       )}
 
       <div

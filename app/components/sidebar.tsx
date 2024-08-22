@@ -4,7 +4,8 @@ import styles from "./home.module.scss";
 
 import { IconButton } from "./button";
 import SettingsIcon from "../icons/settings.svg";
-import GithubIcon from "../icons/github.svg";
+// import GithubIcon from "../icons/github.svg";
+import RoBotIcon from "../icons/robot.svg";
 import ChatGptIcon from "../icons/chatgpt.svg";
 import AddIcon from "../icons/add.svg";
 import CloseIcon from "../icons/close.svg";
@@ -19,6 +20,7 @@ import { useAppConfig, useChatStore } from "../store";
 
 import {
   DEFAULT_SIDEBAR_WIDTH,
+  HOME_URL,
   MAX_SIDEBAR_WIDTH,
   MIN_SIDEBAR_WIDTH,
   NARROW_SIDEBAR_WIDTH,
@@ -143,6 +145,28 @@ export function SideBar(props: { className?: string }) {
 
   useHotKey();
 
+  function addBookmark(url: string, title: string) {
+    if (window.sidebar && window.sidebar.addPanel) {
+      // Firefox before version 23
+      window.sidebar.addPanel(title, url, "");
+    } else if (
+      (window as any).external &&
+      (window as any).external.AddFavorite
+    ) {
+      // IE Favorite
+      (window as any).external.AddFavorite(url, title);
+    } else {
+      // Other browsers (mainly WebKit - Chrome/Safari)
+      alert(
+        "Press " +
+          (navigator.userAgent.toLowerCase().indexOf("mac") !== -1
+            ? "Cmd"
+            : "Ctrl") +
+          " + D to bookmark this page.",
+      );
+    }
+  }
+
   return (
     <div
       className={`${styles.sidebar} ${props.className} ${
@@ -155,10 +179,30 @@ export function SideBar(props: { className?: string }) {
     >
       <div className={styles["sidebar-header"]} data-tauri-drag-region>
         <div className={styles["sidebar-title"]} data-tauri-drag-region>
-          NextChat
+          <a href="https://freetimeai.eu.org">FreeTimeAI</a>
         </div>
         <div className={styles["sidebar-sub-title"]}>
-          Build your own AI assistant.
+          享受私人AI助理.
+          <a
+            href="https://freetimeai.eu.org/business.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            商业化直达
+          </a>
+        </div>
+        <div className={styles["sidebar-sub-title"]}>
+          防失联----：
+          <a
+            href="https://autoaigpt.eu.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              addBookmark("https://autoaigpt.eu.org/", "FreeTimeAI - 收藏")
+            }
+          >
+            防失联收藏
+          </a>
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
           <ChatGptIcon />
@@ -217,8 +261,8 @@ export function SideBar(props: { className?: string }) {
             </Link>
           </div>
           <div className={styles["sidebar-action"]}>
-            <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
-              <IconButton icon={<GithubIcon />} shadow />
+            <a href={HOME_URL} target="_blank" rel="noopener noreferrer">
+              <IconButton icon={<RoBotIcon />} shadow />
             </a>
           </div>
         </div>

@@ -10,7 +10,7 @@ import DeleteChatIcon from "@/app/icons/deleteChatIcon.svg";
 
 import { getTime } from "@/app/utils";
 import DeleteIcon from "@/app/icons/deleteIcon.svg";
-import LogIcon from "@/app/icons/logIcon.svg";
+import AssistantMobileActive from "@/app/icons/assistantMobileActive.svg";
 
 import HoverPopover from "@/app/components/HoverPopover";
 import Popover from "@/app/components/Popover";
@@ -71,7 +71,7 @@ export default function SessionItem(props: {
           )}`}
         >
           <div className=" flex-shrink-0">
-            <LogIcon />
+            <AssistantMobileActive />
           </div>
           <div className="flex flex-col flex-1">
             <div className={`flex justify-between items-center`}>

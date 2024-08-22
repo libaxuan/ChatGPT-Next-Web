@@ -2,6 +2,7 @@ export const OWNER = "Yidadaa";
 export const REPO = "ChatGPT-Next-Web";
 export const REPO_URL = `https://github.com/${OWNER}/${REPO}`;
 export const ISSUE_URL = `https://github.com/${OWNER}/${REPO}/issues`;
+export const HOME_URL = `https://freetimeai.eu.org`;
 export const UPDATE_URL = `${REPO_URL}#keep-updated`;
 export const RELEASE_URL = `${REPO_URL}/releases`;
 export const FETCH_COMMIT_URL = `https://api.github.com/repos/${OWNER}/${REPO}/commits?per_page=1`;
@@ -106,7 +107,8 @@ export const Azure = {
 export const Google = {
   ExampleEndpoint: "https://generativelanguage.googleapis.com/",
   ChatPath: (modelName: string) => `v1beta/models/${modelName}:generateContent`,
-  VisionChatPath: (modelName: string) => `v1beta/models/${modelName}:generateContent`,
+  VisionChatPath: (modelName: string) =>
+    `v1beta/models/${modelName}:generateContent`,
 };
 
 export const DEFAULT_INPUT_TEMPLATE = `{{input}}`; // input / time / model / lang
@@ -127,43 +129,33 @@ Latex inline: \\(x^2\\)
 Latex block: $$e=mc^2$$
 `;
 
-export const SUMMARIZE_MODEL = "gpt-3.5-turbo";
+export const SUMMARIZE_MODEL = "gpt-4o-mini-2024-07-18";
 export const GEMINI_SUMMARIZE_MODEL = "gemini-pro";
 
 export const KnowledgeCutOffDate: Record<string, string> = {
-  default: "2021-09",
+  default: "2023-10",
   "gpt-4-turbo": "2023-12",
-  "gpt-4-turbo-2024-04-09": "2023-12",
   "gpt-4-turbo-preview": "2023-12",
-  "gpt-4-1106-preview": "2023-04",
-  "gpt-4-0125-preview": "2023-12",
-  "gpt-4-vision-preview": "2023-04",
-  // After improvements,
-  // it's now easier to add "KnowledgeCutOffDate" instead of stupid hardcoding it, as was done previously.
+  "gpt-4o": "2023-10",
+  "gpt-4o-2024-05-13": "2023-10",
+  "gpt-4o-mini": "2023-10",
+  "gpt-4o-mini-2024-07-18": "2023-10",
+  "gpt-4o-2024-08-06": "2023-10",
   "gemini-pro": "2023-12",
   "gemini-pro-vision": "2023-12",
 };
 
 const openaiModels = [
-  "gpt-3.5-turbo",
-  "gpt-3.5-turbo-0301",
-  "gpt-3.5-turbo-0613",
-  "gpt-3.5-turbo-1106",
-  "gpt-3.5-turbo-0125",
-  "gpt-3.5-turbo-16k",
-  "gpt-3.5-turbo-16k-0613",
+  "gpt-4o-mini-2024-07-18",
+  "gpt-4o-mini",
+  "gpt-4o-mini-2024-07-18-0125",
+  "gpt-4o-2024-08-06",
+  "gpt-4o",
   "gpt-4",
-  "gpt-4-0314",
-  "gpt-4-0613",
-  "gpt-4-1106-preview",
-  "gpt-4-0125-preview",
-  "gpt-4-32k",
-  "gpt-4-32k-0314",
-  "gpt-4-32k-0613",
-  "gpt-4-turbo",
   "gpt-4-turbo-preview",
-  "gpt-4-vision-preview",
-  "gpt-4-turbo-2024-04-09",
+  "deepseek-ai/deepseek-llm-67b-chat",
+  "deepseek-ai/DeepSeek-V2-Chat",
+  "deepseek-ai/DeepSeek-Coder-V2-Instruct",
 ];
 
 const googleModels = [

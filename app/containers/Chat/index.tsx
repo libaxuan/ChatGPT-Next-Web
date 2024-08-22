@@ -12,12 +12,13 @@ import { Path } from "@/app/constant";
 import { useEffect } from "react";
 
 import AddIcon from "@/app/icons/addIcon.svg";
-import NextChatTitle from "@/app/icons/nextchatTitle.svg";
+import FreeTimeAITitle from "@/app/icons/nextchatTitle.svg";
 
 import MenuLayout from "@/app/components/MenuLayout";
 import Panel from "./ChatPanel";
 import Modal from "@/app/components/Modal";
 import SessionItem from "./components/SessionItem";
+import styles from "@/app/components/home.module.scss";
 
 export default MenuLayout(function SessionList(props) {
   const { setShowPanel } = props;
@@ -57,6 +58,28 @@ export default MenuLayout(function SessionList(props) {
     moveSession(source.index, destination.index);
   };
 
+  function addBookmark(url: string, title: string) {
+    if (window.sidebar && window.sidebar.addPanel) {
+      // Firefox before version 23
+      window.sidebar.addPanel(title, url, "");
+    } else if (
+      (window as any).external &&
+      (window as any).external.AddFavorite
+    ) {
+      // IE Favorite
+      (window as any).external.AddFavorite(url, title);
+    } else {
+      // Other browsers (mainly WebKit - Chrome/Safari)
+      alert(
+        "Press " +
+          (navigator.userAgent.toLowerCase().indexOf("mac") !== -1
+            ? "Cmd"
+            : "Ctrl") +
+          " + D to bookmark this page.",
+      );
+    }
+  }
+
   return (
     <div
       className={`
@@ -73,9 +96,44 @@ export default MenuLayout(function SessionList(props) {
           `}
           data-tauri-drag-region
         >
-          <div className="">
-            <NextChatTitle />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div className={styles["sidebar-title"]} data-tauri-drag-region>
+              <a
+                href="https://freetimeai.eu.org"
+                style={{ color: "#007bff", fontWeight: "bold" }}
+              >
+                FreeTimeAI
+              </a>
+            </div>
+            <div className={styles["sidebar-sub-title"]}>
+              <div>
+                <a
+                  href="https://freetimeai.eu.org/business.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#007bff", fontWeight: "bold" }}
+                >
+                  商业化直达
+                </a>
+                <br />
+                <a
+                  href="https://autoaigpt.eu.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#007bff", fontWeight: "bold" }}
+                  onClick={() =>
+                    addBookmark(
+                      "https://autoaigpt.eu.org/",
+                      "FreeTimeAI - 收藏",
+                    )
+                  }
+                >
+                  防失联收藏
+                </a>
+              </div>
+            </div>
           </div>
+
           <div
             className=" cursor-pointer"
             onClick={() => {
@@ -92,9 +150,12 @@ export default MenuLayout(function SessionList(props) {
         </div>
         <div
           className={`pb-3 text-sm sm:text-sm-mobile text-text-chat-header-subtitle`}
-        >
-          Build your own AI assistant.
-        </div>
+          style={{
+            paddingTop: "5px",
+            paddingBottom: "5px",
+            marginBottom: "-40px",
+          }} // 调整这些值以达到你想要的效果
+        ></div>
       </div>
 
       <div className={`flex-1 overflow-y-auto max-md:pb-chat-panel-mobile `}>

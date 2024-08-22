@@ -1,4 +1,4 @@
-import GitHubIcon from "@/app/icons/githubIcon.svg";
+import SearchIcon from "@/app/icons/search.svg";
 import DiscoverIcon from "@/app/icons/discoverActive.svg";
 import DiscoverInactiveIcon from "@/app/icons/discoverInactive.svg";
 import DiscoverMobileActive from "@/app/icons/discoverMobileActive.svg";
@@ -13,7 +13,7 @@ import AssistantMobileActive from "@/app/icons/assistantMobileActive.svg";
 import AssistantMobileInactive from "@/app/icons/assistantMobileInactive.svg";
 
 import { useAppConfig } from "@/app/store";
-import { Path, REPO_URL } from "@/app/constant";
+import { HOME_URL, Path, REPO_URL } from "@/app/constant";
 import { useNavigate, useLocation } from "react-router-dom";
 import useHotKey from "@/app/hooks/useHotKey";
 import ActionsBar from "@/app/components/ActionsBar";
@@ -78,7 +78,7 @@ export function SideBar(props: { className?: string }) {
           },
           {
             id: "github",
-            icons: <GitHubIcon />,
+            icons: <SearchIcon />,
             className: "!p-2 mb-3 hover:bg-sidebar-btn-hovered",
           },
           {
@@ -95,7 +95,7 @@ export function SideBar(props: { className?: string }) {
         ]}
         onSelect={(id) => {
           if (id === "github") {
-            return window.open(REPO_URL, "noopener noreferrer");
+            return window.open(HOME_URL, "noopener noreferrer");
           }
           if (id !== Path.Masks) {
             return navigate(id);
